@@ -7,41 +7,58 @@ class mark{
         float average;
         char grade[5];
     public:
+        int calculateTotal(){
+            total=marks[1]+marks[2]+marks[3];
+         return total;
+        }
+        float calculateAverage(){
+            total=calculateTotal();
+            cout<<"main Total"<<total;
+            average=total/3;
+            cout<<"\nYour Average Is"<<average<<endl;
+            return average;
+        }
         void accept(void);
         void calculateGrade(void);
-        int calculateTotal(void);
-        int calculateAverage(void);
 };
-int mark::calculateTotal(){
-    for(int i=0;i<3;i++){
-        total=total+marks[i];
-    }
-    cout<<"Your Total"<<total;
-    return total;
-}
-int mark::calculateAverage(){
-    int avgg=calculateTotal();
-    cout<<"\nYour Average Is"<<avgg/3;
-    return avgg;
-}
+
+
 void mark::accept(){
-    for(int i=0;i<3;i++){
+    for(int i=1;i<4;i++){
         cout<<"Enter "<<i<<" Marks ";
         cin>>marks[i];
         cout<<endl;
     }
 }
-void mark::calculateGrade(){
-    int avg=calculateAverage();
-    cout<<"Grade Avg"<<avg;
+void mark::calculateGrade(void){
+    cout<<"Grade Avg"<<average;
+    if(average>=90){
+        cout<<"Your Grade Is A";
+    }
+    else if(average>=80){
+        cout<<"Your Grade Is B";
+    }
+    else if(average>=70){
+        cout<<"your Grade Is C";
+    }
+    else if(average>=60){
+        cout<<"your Grade Is D";
+    }
+    else if(average>=50){
+        cout<<"your Grade Is E";
+    }
+    else if(average>=40){
+        cout<<"your Grade Is F";
+    }
+    else{
+        cout<<"Your Fail";
+    }
 }
 
 int main(){
     mark m;
     m.accept();
-    m.calculateTotal();
     m.calculateAverage();
     m.calculateGrade();
     return 0;
-
 }
