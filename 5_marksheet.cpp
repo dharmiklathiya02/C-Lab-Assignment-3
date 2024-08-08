@@ -1,64 +1,76 @@
-#include<iostream>
-using namespace std;
-class mark{
-    private:
-        int marks[3];
-        int total=0;
-        float average;
-        char grade[5];
-    public:
-        int calculateTotal(){
-            total=marks[1]+marks[2]+marks[3];
-         return total;
-        }
-        float calculateAverage(){
-            total=calculateTotal();
-            cout<<"main Total"<<total;
-            average=total/3;
-            cout<<"\nYour Average Is"<<average<<endl;
-            return average;
-        }
-        void accept(void);
-        void calculateGrade(void);
+#include <iostream.h>
+#include <conio.h>
+#include <iomanip.h>
+
+// using namespace std;
+
+class Marksheet {
+private:
+    int marks[3];
+    int total;
+    float average;
+    char grade;
+
+public:
+    void accept()
+    {
+	cout << "Enter marks for 3 subjects: ";
+	for(int i = 0; i < 3; i++)
+	{
+	    cin >> marks[i];
+	}
+	calculateGrade(); // Initiates the nested function calls
+    }
+
+    void calculateTotal()
+    {
+	total = 0;
+	for(int i = 0; i < 3; i++)
+	{
+	    total += marks[i];
+	}
+    }
+
+    void calculateAverage()
+    {
+	calculateTotal(); // Calls calculateTotal() first
+	//average = static_cast<float>(total) / 3;
+	average = (float)(total)/3;
+    }
+
+    void calculateGrade() {
+	calculateAverage(); // Calls calculateAverage() first
+	if(average >= 90) {
+	    grade = 'A';
+	} else if(average >= 80) {
+	    grade = 'B';
+	} else if(average >= 70) {
+	    grade = 'C';
+	} else if(average >= 60) {
+	    grade = 'D';
+	} else {
+	    grade = 'F';
+	}
+    }
+
+    void display() {
+	cout << "Marks: ";
+	for(int i = 0; i < 3; i++) {
+	    cout << marks[i] << " ";
+	}
+	cout << endl;
+	cout << "Total Marks: " << total << endl;
+	cout << "Average Marks: " << setprecision(2) <<average << endl;
+	cout << "Grade: " << grade << endl;
+    }
 };
 
-
-void mark::accept(){
-    for(int i=1;i<4;i++){
-        cout<<"Enter "<<i<<" Marks ";
-        cin>>marks[i];
-        cout<<endl;
-    }
-}
-void mark::calculateGrade(void){
-    cout<<"Grade Avg"<<average;
-    if(average>=90){
-        cout<<"Your Grade Is A";
-    }
-    else if(average>=80){
-        cout<<"Your Grade Is B";
-    }
-    else if(average>=70){
-        cout<<"your Grade Is C";
-    }
-    else if(average>=60){
-        cout<<"your Grade Is D";
-    }
-    else if(average>=50){
-        cout<<"your Grade Is E";
-    }
-    else if(average>=40){
-        cout<<"your Grade Is F";
-    }
-    else{
-        cout<<"Your Fail";
-    }
-}
-
-int main(){
-    mark m;
+int main()
+{
+    clrscr();
+    Marksheet m;
     m.accept();
-    m.calculateAverage();
-    m.calculateGrade();
+    m.display();
+    getch();
     return 0;
 }
